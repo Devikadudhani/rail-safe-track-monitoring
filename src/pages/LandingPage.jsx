@@ -31,7 +31,7 @@ export default function LandingPage() {
 
                         {/* Item 1 */}
                         <div className="flex gap-4 p-6 border-b md:border-b border-slate-300">
-                            <div className="w-20 h-10 bg-red-700 flex items-center justify-center">
+                            <div className="w-20 h-10 bg-[#0f2b6a] flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
                                 </svg>
@@ -50,7 +50,7 @@ export default function LandingPage() {
 
                         {/* Item 2 */}
                         <div className="flex gap-4 p-6 border-b md:border-b border-l border-slate-300">
-                            <div className="w-20 h-10 bg-red-700 flex items-center justify-center">
+                            <div className="w-20 h-10 bg-[#0f2b6a] flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <rect x="3" y="4" width="18" height="14" />
                                     <path d="M8 20h8" />
@@ -70,7 +70,7 @@ export default function LandingPage() {
 
                         {/* Item 3 */}
                         <div className="flex gap-4 p-6 border-t md:border-t border-slate-300">
-                            <div className="w-20 h-10 bg-red-700 flex items-center justify-center">
+                            <div className="w-20 h-10 bg-[#0f2b6a] flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path d="M6 2h9l5 5v15H6z" />
                                     <path d="M14 2v6h6" />
@@ -90,7 +90,7 @@ export default function LandingPage() {
 
                         {/* Item 4 */}
                         <div className="flex gap-4 p-6 border-t border-l border-slate-300">
-                            <div className="w-20 h-10 bg-red-700 flex items-center justify-center">
+                            <div className="w-20 h-10 bg-[#0f2b6a] flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path d="M5 12h14" />
                                     <path d="M12 5v14" />
@@ -133,7 +133,7 @@ export default function LandingPage() {
 
                         {/* Step 1 */}
                         <div className="relative p-6 text-center border-slate-400 border-b md:border-b-0 md:border-r">
-                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-red-700 text-white font-semibold">
+                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-[#0f2b6a] text-white font-semibold">
                                 1
                             </div>
 
@@ -153,7 +153,7 @@ export default function LandingPage() {
 
                         {/* Step 2 */}
                         <div className="relative p-6 text-center border-slate-400 border-b md:border-b-0 md:border-r">
-                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-red-700 text-white font-semibold">
+                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-[#0f2b6a] text-white font-semibold">
                                 2
                             </div>
 
@@ -173,7 +173,7 @@ export default function LandingPage() {
 
                         {/* Step 3 */}
                         <div className="relative p-6 text-center border-slate-400 border-b md:border-b-0 md:border-r">
-                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-red-700 text-white font-semibold">
+                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-[#0f2b6a] text-white font-semibold">
                                 3
                             </div>
 
@@ -193,7 +193,7 @@ export default function LandingPage() {
 
                         {/* Step 4 */}
                         <div className="relative p-6 text-center">
-                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-red-700 text-white font-semibold">
+                            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center bg-[#0f2b6a] text-white font-semibold">
                                 4
                             </div>
 
@@ -217,7 +217,7 @@ export default function LandingPage() {
 
 
             {/* FOOTER NOTE */}
-            <footer className="px-6 py-6 text-center text-xs text-slate-500">
+            <footer className="px-6 py-6 text-center text-xs text-slate-500 bg-[#F5F7FA] border-t border-slate-300">
                 This system is intended for authorized railway personnel only.
                 All activities are logged for security and audit purposes.
             </footer>

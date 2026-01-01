@@ -1,4 +1,4 @@
-import { User } from "lucide-react";
+import { Train, User } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "#", active: true },
@@ -8,7 +8,7 @@ const navItems = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
+    <header className="sticky top-0 z-50 bg-white border-b border-slate-300">
 
       {/* Main navbar */}
       <div className="py-3">
@@ -16,36 +16,16 @@ export default function Header() {
 
           {/* Left: Logo + Ministry */}
           <div className="flex items-center gap-4">
-            {/* Ashoka Chakra placeholder */}
-            <div className="h-14 w-14 border-2 border-red-700 flex items-center justify-center">
-              <svg
-                viewBox="0 0 100 100"
-                className="h-10 w-10 text-red-700"
-                fill="currentColor"
-              >
-                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3" />
-                <circle cx="50" cy="50" r="8" />
-                {[...Array(24)].map((_, i) => (
-                  <line
-                    key={i}
-                    x1="50"
-                    y1="15"
-                    x2="50"
-                    y2="25"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    transform={`rotate(${i * 15} 50 50)`}
-                  />
-                ))}
-              </svg>
+            <div className="h-14 w-14 flex items-center justify-center">
+              <Train className="h-10 w-10 text-[#0f2b6a]" />
             </div>
 
             <div>
-              <h1 className="text-lg font-semibold text-slate-900 leading-tight">
-                Ministry of Railways
+              <h1 className="text-lg font-semibold text-[#0f2b6a] leading-tight">
+                RTAM – Railway Track Anomaly Monitor
               </h1>
-              <p className="text-sm text-slate-600">
-                Rail Security Division
+              <p className="text-sm tracking-wide text-slate-600">
+                AI-Assisted Monitoring Control
               </p>
             </div>
           </div>
@@ -61,8 +41,8 @@ export default function Header() {
                   href={item.href}
                   className={`px-3 py-2 text-sm font-medium transition-colors ${
                     item.active
-                      ? "bg-red-700 text-white"
-                      : "text-slate-800 hover:bg-slate-100"
+                      ? "bg-[#0f2b6a] text-white"
+                      : "text-[#0f2b6a] hover:bg-slate-100"
                   }`}
                 >
                   {item.label}
@@ -74,12 +54,12 @@ export default function Header() {
             <button
               className="
                 flex items-center gap-2
-                border border-red-700
+                border border-slate-900
                 px-4 py-2
                 text-sm
-                text-red-700
+                text-[#0f2b6a]
                 transition
-                hover:bg-red-700
+                hover:bg-[#0f2b6a]
                 hover:text-white
               "
             >
