@@ -5,7 +5,7 @@ import {
     Activity,
     AlertTriangle,
     Camera,
-    FileText, ArrowLeft
+    FileText, ArrowLeft, Cpu, LayoutList, Filter, Download
 } from "lucide-react";
 
 const alerts = [
@@ -38,21 +38,35 @@ const alerts = [
     },
 ];
 
-function KpiCard({ title, value, subtitle, badge }) {
+function KpiCard({ icon: Icon, iconColor, title, value, subtitle, badge }) {
     return (
-        <div className="bg-white border border-slate-300 p-4">
-            <p className="text-xs text-slate-500 uppercase mb-1">{title}</p>
-            <div className="flex items-center justify-between">
-                <p className="text-2xl font-bold text-slate-900">{value}</p>
-                {badge && (
-                    <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5">
-                        {badge}
-                    </span>
-                )}
+        <div className="bg-white border border-slate-300 p-4 flex items-center gap-4">
+
+            {/* ICON */}
+            <div className={`p-3 rounded-md ${iconColor}`}>
+                <Icon className="h-5 w-5 text-white" />
             </div>
-            {subtitle && (
-                <p className="text-xs text-slate-500 mt-1">{subtitle}</p>
-            )}
+
+            {/* TEXT */}
+            <div className="flex-1">
+                <p className="text-xs text-slate-500 uppercase mb-1">
+                    {title}
+                </p>
+
+                <div className="flex items-center justify-between">
+                    <p className="text-2xl font-bold text-slate-900">
+                        {value}
+                    </p>
+
+                    {badge && (
+                        <span
+                            className={`text-xs px-2 py-0.5 font-medium border ${badge.color}`}
+                        >
+                            {badge.text}
+                        </span>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }
@@ -88,38 +102,89 @@ export default function TrackMonitor() {
             </header>
             <main className="flex-1 p-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                    <KpiCard title="Active Alerts" value="12" badge="+2 New" />
-                    <KpiCard title="Highest Anomaly" value="92%" subtitle="AI Confidence: High" />
-                    <KpiCard title="Sensors Online" value="450 / 452" subtitle="99.5% Uptime" />
-                    <KpiCard title="Cameras Active" value="98%" subtitle="Stable" />
+                    <KpiCard
+                        icon={AlertTriangle}
+                        iconColor="bg-red-600"
+                        title="Active Alerts"
+                        value="12"
+                        badge={{
+                            text: "+2 New",
+                            color: "bg-red-100 text-red-700 border-red-300"
+                        }}
+                    />
+                    <KpiCard
+                        icon={Cpu}
+                        iconColor="bg-orange-500"
+                        title="Highest Anomaly"
+                        value="92%"
+                        badge={{
+                            text: "HIGH",
+                            color: "bg-orange-100 text-orange-700 border-orange-300"
+                        }}
+                    />
+                    <KpiCard
+                        icon={Activity}
+                        iconColor="bg-green-600"
+                        title="Sensors Online"
+                        value="450 / 452"
+                        badge={{
+                            text: "99.5% Uptime",
+                            color: "bg-green-100 text-green-700 border-green-300"
+                        }}
+                    />
+                    <KpiCard
+                        icon={Camera}
+                        iconColor="bg-blue-600"
+                        title="Cameras Active"
+                        value="98%"
+                        badge={{
+                            text: "Stable",
+                            color: "bg-blue-100 text-blue-700 border-blue-300"
+                        }}
+                    />
                 </div>
                 <div className="grid grid-cols-12 gap-4 mb-6">
                     {/* TRACK TABLE */}
                     <section className="col-span-12 md:col-span-8 bg-white border border-slate-300 rounded-sm">
                         {/* Header */}
                         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200">
-                            <h3 className="text-sm font-semibold text-slate-900">
-                                Track Sections Overview
-                            </h3>
+                            <div className="flex items-center gap-2">
+                                <LayoutList className="h-4 w-4 text-slate-600" />
+                                <h3 className="text-sm font-semibold text-slate-900">
+                                    Track Sections Overview
+                                </h3>
+                            </div>
 
                             <div className="flex items-center gap-2">
-                                <button className="border border-slate-300 px-3 py-1 text-xs hover:bg-slate-100">
+
+                                <button className="flex items-center gap-1.5 border border-slate-300 px-3 py-1 text-xs text-slate-700 hover:bg-slate-100">
+                                    <Filter className="h-3.5 w-3.5" />
                                     FILTER
                                 </button>
-                                <button className="border border-slate-300 px-3 py-1 text-xs hover:bg-slate-100">
+
+                                <button className="flex items-center gap-1.5 border border-slate-300 px-3 py-1 text-xs text-slate-700 hover:bg-slate-100">
+                                    <Download className="h-3.5 w-3.5" />
                                     EXPORT
                                 </button>
+
                             </div>
                         </div>
 
                         {/* Table */}
                         <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
+                            <table className="w-full text-sm table-fixed">
+
+                                {/* COLUMN WIDTHS (THIS IS THE KEY FIX) */}
+                                <colgroup>
+                                    <col className="w-[15%]" /> {/* Track ID */}
+                                    <col className="w-[30%]" /> {/* Anomaly */}
+                                    <col className="w-[15%]" /> {/* Risk */}
+                                    <col className="w-[20%]" /> {/* Last Update */}
+                                    <col className="w-[20%]" /> {/* Status */}
+                                </colgroup>
+
                                 <thead className="bg-slate-50 border-b border-slate-200">
-                                    <tr
-                                        onClick={() => setSelectedAlert(alerts[0])}
-                                        className="cursor-pointer hover:bg-slate-50"
-                                    >
+                                    <tr className="text-left text-xs text-slate-600 uppercase">
                                         <th className="px-4 py-3">Track ID</th>
                                         <th className="px-4 py-3">Anomaly Score (AI-assisted)</th>
                                         <th className="px-4 py-3">Risk Level</th>
@@ -136,9 +201,13 @@ export default function TrackMonitor() {
                                             className={`cursor-pointer hover:bg-slate-50 ${selectedAlert.id === alert.id ? "bg-slate-100" : ""
                                                 }`}
                                         >
-                                            <td className="px-4 py-3 font-medium">{alert.id}</td>
+                                            {/* Track ID */}
+                                            <td className="px-4 py-3 font-medium text-left">
+                                                {alert.id}
+                                            </td>
 
-                                            <td className="px-4 py-3">
+                                            {/* Anomaly */}
+                                            <td className="px-4 py-3 text-left">
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-32 h-2 bg-slate-200">
                                                         <div
@@ -157,7 +226,8 @@ export default function TrackMonitor() {
                                                 </div>
                                             </td>
 
-                                            <td className="px-4 py-3">
+                                            {/* Risk */}
+                                            <td className="px-4 py-3 text-left">
                                                 <span
                                                     className={`px-2 py-0.5 text-xs border ${alert.color === "red"
                                                             ? "bg-red-100 text-red-700 border-red-300"
@@ -170,11 +240,13 @@ export default function TrackMonitor() {
                                                 </span>
                                             </td>
 
-                                            <td className="px-4 py-3 text-xs text-slate-600">
+                                            {/* Last Update */}
+                                            <td className="px-4 py-3 text-xs text-slate-600 text-left">
                                                 {alert.time}
                                             </td>
 
-                                            <td className="px-4 py-3">
+                                            {/* Status */}
+                                            <td className="px-4 py-3 text-left">
                                                 <span
                                                     className={`text-xs font-semibold ${alert.color === "red"
                                                             ? "text-red-600"
@@ -193,7 +265,6 @@ export default function TrackMonitor() {
                                         </tr>
                                     ))}
                                 </tbody>
-
                             </table>
                         </div>
                     </section>
