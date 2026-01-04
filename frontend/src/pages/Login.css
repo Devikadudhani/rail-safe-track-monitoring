@@ -172,4 +172,36 @@
 
 .login-btn:hover {
   background: #0b2154;
+}/* HEADER ROW: Back + Title */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+/* Center title */
+.header-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Back button on the left */
+.back-btn {
+  position: absolute;
+  left: 0;
+  background: white;
+  border: none;
+  color: #0b2154;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px;
+   border-radius: 10px;
+   width: 40px;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
 }

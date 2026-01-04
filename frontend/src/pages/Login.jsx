@@ -1,8 +1,12 @@
 import { useState } from "react";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
   const [role, setRole] = useState("Track Monitor");
+  const navigate = useNavigate();
+
 
   const roles = [
     { title: "Track Monitor", sub: "Detection & First Response" },
@@ -15,13 +19,22 @@ export default function Login() {
     <div className="login-page">
       <div className="login-box">
       <div className="login-header">
-  <div className="login-icon">
+ 
+ <div className="header-row">
+    <button
+      type="button"
+      className="back-btn"
+      onClick={() => navigate("/")} >
+          <img src="/back.png" alt="Back" />
+    </button>
+ <div className="login-icon">
     <img src="/train-logo.jpg" alt="RTAM Icon" />
   </div>
-
-  <h2>RTAM SYSTEM LOGIN</h2>
+    
+  </div>
+  <h2 className="header-title">RTAM SYSTEM LOGIN</h2>
   <p className="login-subtitle">
-    Railway Track Anti-Tampering Monitor
+    Railway Track Anomaly Monitor
   </p>
 
   <span className="auth-badge">
