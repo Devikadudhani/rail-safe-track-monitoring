@@ -3,32 +3,32 @@ const axios = require("axios");
 
 const router = express.Router();
 
-// Fetch fused ML decision
+// FINAL ML AGGREGATED ENDPOINT
 router.get("/predict", async (req, res) => {
   try {
-    const mlResponse = await axios.post(
+    const response = await axios.post(
       "http://127.0.0.1:8000/fusion/predict"
     );
 
-    res.json([
+    // Convert ML output to frontend-friendly alerts
+    const ml = response.data;
+
+    const alerts = [
       {
-        id: "INC-" + Date.now(),
-        km: mlResponse.data.track_section.replace("KM_", ""),
-        anomalyScore: mlResponse.data.sensor_confidence,
-        risk: mlResponse.data.final_risk,
-        severity: mlResponse.data.final_risk,
+        id: ml.track_section,
+        km: "23.4",
+        severity: ml.final_risk === "HIGH" ? "CRITICAL" : "NORMAL",
+        risk: ml.final_risk,
+        anomalyScore: ml.sensor_confidence,
         time: "Just now",
-        color:
-          mlResponse.data.final_risk === "HIGH"
-            ? "red"
-            : mlResponse.data.final_risk === "MEDIUM"
-            ? "yellow"
-            : "green",
+        color: ml.final_risk === "HIGH" ? "red" : "green",
       },
-    ]);
-  } catch (err) {
-    console.error("ML service error:", err.message);
-    res.status(500).json({ message: "ML Service unavailable" });
+    ];
+
+    res.json(alerts);
+  } catch (error) {
+    console.error("ML Service error:", error.message);
+    res.status(500).json({ error: "ML Service unavailable" });
   }
 });
 
