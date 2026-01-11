@@ -4,6 +4,8 @@ import TrackMonitor from "./pages/TrackMonitor";
 import TrafficControlPage from "./pages/TrafficControlPage";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ActiveIncidents from "./pages/ActiveIncidents";
+import EngineeringDashboard from "./pages/EngineeringDashboard";
 
 export default function App() {
   return (
@@ -23,6 +25,22 @@ export default function App() {
         element={
           <ProtectedRoute allowedRole="TRAFFIC_CONTROL">
             <TrafficControlPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engineering"
+        element={
+          <ProtectedRoute allowedRole="ENGINEERING_AUTHORITY">
+            <ActiveIncidents />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/clearance"
+        element={
+          <ProtectedRoute allowedRole="CLEARANCE_AUTHORITY">
+            <EngineeringDashboard />
           </ProtectedRoute>
         }
       />
