@@ -233,17 +233,17 @@ export default function EngineeringDashboard() {
                             <div className="border-t pt-4 space-y-3">
                                 <button className="w-full bg-[#0f2b6a] text-white px-4 py-2 flex items-center justify-center gap-2">
                                     <Wrench className="h-4 w-4" />
-                                    Start Inspection
+                                    Safety/Clearance Review
                                 </button>
 
                                 <button className="w-full border border-slate-300 px-4 py-2 flex items-center justify-center gap-2 hover:bg-slate-100">
                                     <Camera className="h-4 w-4" />
-                                    Upload Inspection Photos
+                                   Final approval/Closure
                                 </button>
 
                                 <button className="w-full border border-slate-300 px-4 py-2 flex items-center justify-center gap-2 hover:bg-slate-100">
                                     <Upload className="h-4 w-4" />
-                                    Submit Repair Estimate
+                                    Change alert status
                                 </button>
                             </div>
                         </div>
