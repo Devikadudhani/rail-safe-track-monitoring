@@ -8,7 +8,7 @@ const mlRoutes = require("./routes/mlRoutes");
 
 const app = express(); 
 
-connectDB();
+// connectDB();
 
 app.use(cors());
 app.use(express.json());
