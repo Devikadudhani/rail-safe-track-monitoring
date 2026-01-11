@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+
 
 export default function Login() {
   const [role, setRole] = useState("Track Monitor");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -102,41 +106,73 @@ export default function Login() {
         <form onSubmit={handleLogin}>
           <div className="row">
             <div className="form-group">
-              <label>State</label>
+              <label>Zone</label>
               <select>
-                <option>Delhi</option>
+                <option>Northern Railway (Delhi Division)</option>
               </select>
             </div>
 
             <div className="form-group">
-              <label>City</label>
+              <label>Route</label>
               <select>
-                <option>Delhi</option>
+                <option>Delhi–Ghaziabad</option>
               </select>
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Station</label>
-            <input type="text" />
+          <div className="row">
+           <div className="form-group">
+              <label>Line</label>
+              <select>
+                <option>UP</option>
+                <option>DN</option>
+                <option>UP2</option>
+                <option>DN2</option>
+                <option>YARD</option>
+                <option>SID</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Segment Name</label>
+              <select>
+                <option>NR-DLI-DLI-GZB-UP-KM0012-S001</option>
+                <option>NR-DLI-DLI-GZB-UP-KM0012-S002</option>
+                <option>NR-DLI-DLI-GZB-DN-KM0012-S001</option>
+                <option>NR-DLI-DLI-GZB-DN-KM0012-S002</option>
+              </select>
+            </div>
           </div>
 
-          {role === "Track Monitor" && (
-            <div className="form-group">
-              <label>Track / Section</label>
-              <input type="text" />
-            </div>
-          )}
-
-          <div className="form-group">
+         <div className="form-group" style={{ position: "relative" }}>
             <label>Password</label>
+
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: "70%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#555",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </span>
+
           </div>
+
+
 
           <button type="submit" className="login-btn">
             SECURE LOGIN

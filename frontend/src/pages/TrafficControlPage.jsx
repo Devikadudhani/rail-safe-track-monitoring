@@ -1,17 +1,29 @@
 import AppBrand from "../components/AppBrand";
-import { Activity, AlertTriangle, Train, Bell, ArrowLeft } from "lucide-react";
+import wave from "../assets/wave.jpeg";
+import train from "../assets/train.png";
+
+import {
+  Activity,
+  AlertTriangle,
+  Train,
+  Bell,
+  ArrowLeft,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function TrafficControlPage() {
   const navigate = useNavigate();
 
+  const selectedAlert = {
+    id: "SEC-025",
+    time: "18 min ago",
+  };
+
   return (
     <div className="min-h-screen bg-[#F4F7FB] flex flex-col">
-
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-300">
         <div className="max-w-7xl mx-auto px-6 py-1 flex items-center">
-
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-2 border border-slate-300 px-3 py-1 text-sm text-slate-700 hover:bg-slate-100 transition"
@@ -36,11 +48,10 @@ export default function TrafficControlPage() {
         </div>
       </header>
 
-      {/*  MAIN  */}
+      {/* MAIN */}
       <main className="flex-1 p-6">
         <div className="max-w-7xl mx-auto grid grid-cols-12 gap-4">
-
-          {/* LEFT: ESCALATED ALERTS */}
+          {/* LEFT PANEL */}
           <section className="col-span-12 md:col-span-8 bg-white border border-slate-300">
             <div className="px-4 py-3 bg-[#0f2b6a] border-b border-slate-300">
               <h3 className="text-sm font-bold text-white uppercase">
@@ -71,6 +82,7 @@ export default function TrafficControlPage() {
                       12 min
                     </td>
                   </tr>
+
                   <tr className="hover:bg-slate-50 cursor-pointer">
                     <td className="p-2 border font-medium">SEC-019</td>
                     <td className="p-2 border">KM 118.10 – 118.25</td>
@@ -84,10 +96,10 @@ export default function TrafficControlPage() {
               </table>
             </div>
 
-            {/* Selected Section Summary */}
+            {/* SECTION DETAILS */}
             <div className="border-t border-slate-300 p-4">
               <h4 className="text-sm font-semibold text-slate-900 mb-3 uppercase">
-                Section Details – SEC-025
+                Section Details – {selectedAlert.id}
               </h4>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
@@ -101,19 +113,48 @@ export default function TrafficControlPage() {
                 </div>
                 <div className="border border-slate-300 p-2">
                   <p className="text-slate-500">Detection Time</p>
-                  <p className="font-semibold">18 min ago</p>
+                  <p className="font-semibold">{selectedAlert.time}</p>
                 </div>
                 <div className="border border-slate-300 p-2">
                   <p className="text-slate-500">Approaching Train</p>
                   <p className="font-semibold text-red-600">12 min</p>
                 </div>
               </div>
+
+              {/* VIBRATION + CAMERA */}
+             <div className="border border-slate-300 rounded">
+  <div className="px-3 py-2 bg-slate-100 border-b text-xs font-semibold uppercase">
+    Vibration Waveform Analysis
+  </div>
+
+  <div className="flex justify-center p-4 bg-white">
+    <img
+      src={wave}
+      alt="Vibration waveform"
+      className="max-w-[520px] w-full h-auto"
+    />
+  </div>
+</div>
+
+               <div className="border border-slate-300 rounded">
+  <div className="px-3 py-2 bg-slate-100 border-b text-xs font-semibold uppercase">
+    Camera Snapshot
+  </div>
+
+<div className="h-44 bg-black flex items-center justify-center">
+  <img
+    src={train}
+    alt={`Camera Snapshot ${selectedAlert.id}`}
+    className="max-h-full max-w-full object-contain"
+  />
+</div>
+</div>
+
             </div>
           </section>
 
-          {/* RIGHT: OPERATIONAL CONTROLS */}
+          {/* RIGHT PANEL */}
           <aside className="col-span-12 md:col-span-4 bg-white border border-slate-300">
-
             <div className="px-4 py-3 bg-[#0f2b6a] border-b border-slate-300">
               <h3 className="text-sm font-bold text-white uppercase">
                 Operational Controls
@@ -121,8 +162,6 @@ export default function TrafficControlPage() {
             </div>
 
             <div className="p-4 space-y-4">
-
-              {/* Protection Status */}
               <div className="border border-slate-300 p-3 text-sm text-center">
                 <p className="text-slate-500 mb-1">Track Protection</p>
                 <p className="font-semibold text-red-600">
@@ -130,7 +169,6 @@ export default function TrafficControlPage() {
                 </p>
               </div>
 
-              {/* Train Controls */}
               <div>
                 <h4 className="text-sm font-semibold text-slate-900 mb-2 uppercase">
                   Train Movement Controls
@@ -152,15 +190,16 @@ export default function TrafficControlPage() {
                 </div>
               </div>
 
-              {/* Notifications */}
               <div>
                 <h4 className="text-sm font-semibold text-slate-900 mb-2 uppercase">
                   Notifications
                 </h4>
+
                 <button className="w-full border border-slate-300 px-3 py-2 text-sm flex items-center justify-center gap-2 hover:bg-slate-100">
                   <Bell className="h-4 w-4" />
                   Notify Adjacent Sections
                 </button>
+
                 <button className="w-full mt-2 bg-[#0f2b6a] text-white px-3 py-2 text-sm">
                   Escalate to Engineering Authority
                 </button>
