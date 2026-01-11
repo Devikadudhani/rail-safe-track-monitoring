@@ -104,44 +104,67 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleLogin}>
-          <div className="row">
-            <div className="form-group">
-              <label>Zone</label>
-              <select>
-                <option>Northern Railway (Delhi Division)</option>
-              </select>
-            </div>
+          {/* ZONE (common for all) */}
+<div className="row">
+  <div className="form-group">
+    <label>Zone</label>
+    <select>
+      <option>Northern Railway (Delhi Division)</option>
+    </select>
+  </div>
+</div>
 
-            <div className="form-group">
-              <label>Route</label>
-              <select>
-                <option>Delhi–Ghaziabad</option>
-              </select>
-            </div>
-          </div>
+{/* TRAFFIC CONTROL → STATION */}
+{role === "Traffic Control Authority" && (
+  <div className="row">
+    <div className="form-group">
+      <label>Station</label>
+      <select>
+        <option>New Delhi (NDLS)</option>
+        <option>Ghaziabad (GZB)</option>
+        <option>Delhi Shahdara (DSA)</option>
+      </select>
+    </div>
+  </div>
+)}
 
-          <div className="row">
-           <div className="form-group">
-              <label>Line</label>
-              <select>
-                <option>UP</option>
-                <option>DN</option>
-                <option>UP2</option>
-                <option>DN2</option>
-                <option>YARD</option>
-                <option>SID</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Segment Name</label>
-              <select>
-                <option>NR-DLI-DLI-GZB-UP-KM0012-S001</option>
-                <option>NR-DLI-DLI-GZB-UP-KM0012-S002</option>
-                <option>NR-DLI-DLI-GZB-DN-KM0012-S001</option>
-                <option>NR-DLI-DLI-GZB-DN-KM0012-S002</option>
-              </select>
-            </div>
-          </div>
+{/* ALL OTHER ROLES */}
+{role !== "Traffic Control Authority" && (
+  <>
+    <div className="row">
+      <div className="form-group">
+        <label>Route</label>
+        <select>
+          <option>Delhi–Ghaziabad</option>
+        </select>
+      </div>
+    </div>
+
+    <div className="row">
+      <div className="form-group">
+        <label>Line</label>
+        <select>
+          <option>UP</option>
+          <option>DN</option>
+          <option>UP2</option>
+          <option>DN2</option>
+          <option>YARD</option>
+          <option>SID</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>Segment Name</label>
+        <select>
+          <option>NR-DLI-DLI-GZB-UP-KM0012-S001</option>
+          <option>NR-DLI-DLI-GZB-UP-KM0012-S002</option>
+          <option>NR-DLI-DLI-GZB-DN-KM0012-S001</option>
+          <option>NR-DLI-DLI-GZB-DN-KM0012-S002</option>
+        </select>
+      </div>
+    </div>
+  </>
+)}
 
          <div className="form-group" style={{ position: "relative" }}>
             <label>Password</label>
