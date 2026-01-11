@@ -1,5 +1,7 @@
 import AppBrand from "../components/AppBrand";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { mockAlerts } from "../data/mockAlerts";
+
 import { useNavigate } from "react-router-dom";
 import {
     Activity,
@@ -8,35 +10,7 @@ import {
     FileText, ArrowLeft, Cpu, LayoutList, Filter, Download
 } from "lucide-react";
 
-const alerts = [
-    {
-        id: "SEC-025",
-        km: "125.34",
-        severity: "CRITICAL",
-        risk: "HIGH",
-        anomalyScore: 0.87,
-        time: "2 minutes ago",
-        color: "red",
-    },
-    {
-        id: "SEC-019",
-        km: "118.20",
-        severity: "SUSPICIOUS",
-        risk: "MEDIUM",
-        anomalyScore: 0.54,
-        time: "8 minutes ago",
-        color: "yellow",
-    },
-    {
-        id: "SEC-031",
-        km: "130.88",
-        severity: "NORMAL",
-        risk: "LOW",
-        anomalyScore: 0.18,
-        time: "15 minutes ago",
-        color: "green",
-    },
-];
+
 
 function KpiCard({ icon: Icon, iconColor, title, value, subtitle, badge }) {
     return (
@@ -72,6 +46,21 @@ function KpiCard({ icon: Icon, iconColor, title, value, subtitle, badge }) {
 }
 
 export default function TrackMonitor() {
+    const [alerts, setAlerts] = useState(mockAlerts);
+    const [selectedAlert, setSelectedAlert] = useState(mockAlerts[0]);
+
+    useEffect(() => {
+        fetch("/api/ml/predict")
+            .then((res) => res.json())
+            .then((data) => {
+                setAlerts(data);
+                setSelectedAlert(data[0]); // auto-select first alert
+            })
+            .catch((err) => {
+                console.error("ML API failed, using mock alerts");
+            });
+    }, []);
+    
     const [selectedAlert, setSelectedAlert] = useState(alerts[0]);
     const [showNotesBox, setShowNotesBox] = useState(false);
     const [noteText, setNoteText] = useState("");
